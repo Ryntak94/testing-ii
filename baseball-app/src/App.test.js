@@ -1,7 +1,13 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 import App, {Display, Dashboard} from './App';
+
+const clickMultipleTimes    =   (num, button)  =>  {
+    for(i = 0; i < num; i++)    {
+        fireEvent.click(button)
+    }
+}
 
 
 describe('Display renders and functions properly',  ()  =>  {
@@ -9,13 +15,66 @@ describe('Display renders and functions properly',  ()  =>  {
     test('Display without crashing', () => {
       render(<Display />);
     });
+
     test('Display shows count of balls and strikes for at-bat', ()  =>  {
         const component = render(<Display />);
         const balls = component.getByTestId('balls');
         const strikes = component.getByTestId('strikes');
         expect(balls).toHaveContext('0');
-        expect(balls).toHaveContext('0');
+        expect(strikes).toHaveContext('0');
     })
+
+    test('Display balls and strikes reset to 0 when balls hits 4',  ()  =>  {
+        const display = render(<Display />);
+        const dashboard = render(<Dashboard />);
+        const balls = component.getByTestId('balls');
+        const strikes = component.getByTestId('strikes');
+        const ballButton = component.getByTestId('ballButton');
+        const strikeButton = component.getByTestId('strikeButton');
+        clickMultipleTimes(2, strikeButton)
+        clickMultipleTimes(4, ballButton)
+        expect(balls).toHaveContext('0')
+        expect(strikes).toHaveContext('0')
+    })
+
+    test('Display balls and strikes reset to 0 when strikes hits 3',  ()  =>  {
+        const display = render(<Display />);
+        const dashboard = render(<Dashboard />);
+        const balls = component.getByTestId('balls');
+        const strikes = component.getByTestId('strikes');
+        const ballButton = component.getByTestId('ballButton');
+        const strikeButton = component.getByTestId('strikeButton');
+        clickMultipleTimes(3, ballButton)
+        clickMultipleTimes(3, strikeButton)
+        expect(balls).toHaveContext('0')
+        expect(strikes).toHaveContext('0')
+    })
+
+    test('Display balls and strikes reset to 0 when strikes hits 3',  ()  =>  {
+        const display = render(<Display />);
+        const dashboard = render(<Dashboard />);
+        const balls = component.getByTestId('balls');
+        const strikes = component.getByTestId('strikes');
+        const ballButton = component.getByTestId('ballButton');
+        const strikeButton = component.getByTestId('strikeButton');
+        const hitButton = component.getByTestId('hitButton');
+        clickMultipleTimes(3, ballButton)
+        clickMultipleTimes(2, strikeButton)
+        fireEvent.click(hitButton);
+        expect(balls).toHaveContext('0')
+        expect(strikes).toHaveContext('0')
+    })
+
+    test('Display strikes increases to a max of 2 when foul button is clicked',  ()  =>  {
+        const display = render(<Display />);
+        const dashboard = render(<Dashboard />);
+        const balls = component.getByTestId('balls');
+        const strikes = component.getByTestId('strikes');
+        const foulButton = component.getByTestId('foulButton');
+        clickMultipleTimes(10, foulButton)
+        expect(strikes).toHaveContext('2')
+    })
+
 })
 
 describe('Dashboard renders and functions properly',  ()  =>  {
@@ -23,4 +82,15 @@ describe('Dashboard renders and functions properly',  ()  =>  {
     test('Dashboard without crashing', () => {
       render(<Dashboard />);
     });
+    test('Dashboard buttons render without crashing',   ()  =>  {
+        const component = render(<Dashboard />);
+        const ballButton = component.getByTestId('ballButton')
+        const foulButton = component.getByTestId('foulButton')
+        const hitButton = component.getByTestId('hitButton')
+        const strikeButton = component.getByTestId('strikeButton')
+        expect(ballButton).toHaveContext('ball');
+        expect(strikeButton).toHaveContext('strike');
+        expect(foulButton).toHaveContext('foul');
+        expect(hitButton).toHaveContext('hit');
+    })
 })
