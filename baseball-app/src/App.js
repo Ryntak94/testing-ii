@@ -20,10 +20,10 @@ class Dashboard extends Component   {
     render()    {
         return(
             <div>
-                <div data-testid='strikeButton' onClick={this.strikeButtonClickHandler}>Strike</div>
-                <div data-testid='ballButton' onClick={this.ballButtonClickHandler}>Ball</div>
-                <div data-testid='foulButton' onClick={this.foulButtonClickHandler}>Foul</div>
-                <div data-testid='hitButton' onClick={this.hitButtonClickHandler}>Hit</div>
+                <div data-testid='strikeButton' onClick={() =>  this.props.strikeButtonClickHandler()}>Strike</div>
+                <div data-testid='ballButton' onClick={()   =>  this.props.ballButtonClickHandler()}>Ball</div>
+                <div data-testid='foulButton' onClick={()   =>  this.props.foulButtonClickHandler()}>Foul</div>
+                <div data-testid='hitButton' onClick={()    =>  this.props.hitButtonClickHandler()}>Hit</div>
             </div>
         )
     }
@@ -45,9 +45,9 @@ class App extends Component {
                 balls: 0
             }))
         }   else {
-            this.setState((state)   =>  {
-                strikes: this.state.strikes++
-            })
+            this.setState((state)   =>  ({
+                strikes: this.state.strikes + 1
+            }))
         }
     }
 
@@ -58,9 +58,9 @@ class App extends Component {
                 balls: 0
             }))
         }   else {
-            this.setState((state)   =>  {
-                strikes: this.state.strikes++
-            })
+            this.setState((state)   =>  ({
+                strikes: this.state.strikes + 1
+            }))
         }
     }
 
@@ -71,9 +71,9 @@ class App extends Component {
                 balls: 0
             }))
         }   else {
-            this.setState((state)   =>  {
-                balls: this.state.balls++
-            })
+            this.setState((state)   =>  ({
+                balls: this.state.balls + 1
+            }))
         }
     }
 
