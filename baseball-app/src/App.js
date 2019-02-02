@@ -3,10 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 class Display extends Component   {
+    constructor(props)  {
+        super(props);
+        this.state  =   {
+            strikes: 0,
+            balls:  0
+        }
+    }
     render()    {
         return(
             <div>
-
+                Strikes: <div data-testid='strikes'>{this.state.strikes}</div>
+                Balls: <div data-testid='balls'>{this.state.balls}</div>
             </div>
         )
     }

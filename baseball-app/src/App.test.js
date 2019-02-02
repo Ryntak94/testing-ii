@@ -20,59 +20,59 @@ describe('Display renders and functions properly',  ()  =>  {
         const component = render(<Display />);
         const balls = component.getByTestId('balls');
         const strikes = component.getByTestId('strikes');
-        expect(balls).toHaveContext('0');
-        expect(strikes).toHaveContext('0');
+        expect(balls).toHaveTextContent('0');
+        expect(strikes).toHaveTextContent('0');
     })
 
     test('Display balls and strikes reset to 0 when balls hits 4',  ()  =>  {
         const display = render(<Display />);
         const dashboard = render(<Dashboard />);
-        const balls = component.getByTestId('balls');
-        const strikes = component.getByTestId('strikes');
-        const ballButton = component.getByTestId('ballButton');
-        const strikeButton = component.getByTestId('strikeButton');
+        const balls = display.getByTestId('balls');
+        const strikes = display.getByTestId('strikes');
+        const ballButton = dashboard.getByTestId('ballButton');
+        const strikeButton = dashboard.getByTestId('strikeButton');
         clickMultipleTimes(2, strikeButton)
         clickMultipleTimes(4, ballButton)
-        expect(balls).toHaveContext('0')
-        expect(strikes).toHaveContext('0')
+        expect(balls).toHaveTextContent('0')
+        expect(strikes).toHaveTextContent('0')
     })
 
     test('Display balls and strikes reset to 0 when strikes hits 3',  ()  =>  {
         const display = render(<Display />);
         const dashboard = render(<Dashboard />);
-        const balls = component.getByTestId('balls');
-        const strikes = component.getByTestId('strikes');
-        const ballButton = component.getByTestId('ballButton');
-        const strikeButton = component.getByTestId('strikeButton');
+        const balls = display.getByTestId('balls');
+        const strikes = display.getByTestId('strikes');
+        const ballButton = dashboard.getByTestId('ballButton');
+        const strikeButton = dashboard.getByTestId('strikeButton');
         clickMultipleTimes(3, ballButton)
         clickMultipleTimes(3, strikeButton)
-        expect(balls).toHaveContext('0')
-        expect(strikes).toHaveContext('0')
+        expect(balls).toHaveTextContent('0')
+        expect(strikes).toHaveTextContent('0')
     })
 
     test('Display balls and strikes reset to 0 when strikes hits 3',  ()  =>  {
         const display = render(<Display />);
         const dashboard = render(<Dashboard />);
-        const balls = component.getByTestId('balls');
-        const strikes = component.getByTestId('strikes');
-        const ballButton = component.getByTestId('ballButton');
-        const strikeButton = component.getByTestId('strikeButton');
-        const hitButton = component.getByTestId('hitButton');
+        const balls = display.getByTestId('balls');
+        const strikes = display.getByTestId('strikes');
+        const ballButton = dashboard.getByTestId('ballButton');
+        const strikeButton = dashboard.getByTestId('strikeButton');
+        const hitButton = dashboard.getByTestId('hitButton');
         clickMultipleTimes(3, ballButton)
         clickMultipleTimes(2, strikeButton)
         fireEvent.click(hitButton);
-        expect(balls).toHaveContext('0')
-        expect(strikes).toHaveContext('0')
+        expect(balls).toHaveTextContent('0')
+        expect(strikes).toHaveTextContent('0')
     })
 
     test('Display strikes increases to a max of 2 when foul button is clicked',  ()  =>  {
         const display = render(<Display />);
         const dashboard = render(<Dashboard />);
-        const balls = component.getByTestId('balls');
-        const strikes = component.getByTestId('strikes');
-        const foulButton = component.getByTestId('foulButton');
+        const balls = display.getByTestId('balls');
+        const strikes = display.getByTestId('strikes');
+        const foulButton = dashboard.getByTestId('foulButton');
         clickMultipleTimes(10, foulButton)
-        expect(strikes).toHaveContext('2')
+        expect(strikes).toHaveTextContent('2')
     })
 
 })
@@ -88,9 +88,9 @@ describe('Dashboard renders and functions properly',  ()  =>  {
         const foulButton = component.getByTestId('foulButton')
         const hitButton = component.getByTestId('hitButton')
         const strikeButton = component.getByTestId('strikeButton')
-        expect(ballButton).toHaveContext('ball');
-        expect(strikeButton).toHaveContext('strike');
-        expect(foulButton).toHaveContext('foul');
-        expect(hitButton).toHaveContext('hit');
+        expect(ballButton).toHaveTextContent('ball');
+        expect(strikeButton).toHaveTextContent('strike');
+        expect(foulButton).toHaveTextContent('foul');
+        expect(hitButton).toHaveTextContent('hit');
     })
 })
