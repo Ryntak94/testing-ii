@@ -20,10 +20,10 @@ class Dashboard extends Component   {
     render()    {
         return(
             <div>
-                <div data-testid='strikeButton'>Strike</div>
-                <div data-testid='ballButton'>Ball</div>
-                <div data-testid='foulButton'>Foul</div>
-                <div data-testid='hitButton'>Hit</div>
+                <div data-testid='strikeButton' onClick={this.strikeButtonClickHandler}>Strike</div>
+                <div data-testid='ballButton' onClick={this.ballButtonClickHandler}>Ball</div>
+                <div data-testid='foulButton' onClick={this.foulButtonClickHandler}>Foul</div>
+                <div data-testid='hitButton' onClick={this.hitButtonClickHandler}>Hit</div>
             </div>
         )
     }
@@ -38,13 +38,62 @@ class App extends Component {
         }
     }
 
+    strikeButtonClickHandler    =   ()  =>  {
+        if(this.state.strikes    === 2)  {
+            this.setState((state)   =>  ({
+                strikes: 0,
+                balls: 0
+            }))
+        }   else {
+            this.setState((state)   =>  {
+                strikes: this.state.strikes++
+            })
+        }
+    }
 
+    foulButtonClickHandler    =   ()  =>  {
+        if(this.state.strikes    === 2)  {
+            this.setState((state)   =>  ({
+                strikes: 2,
+                balls: 0
+            }))
+        }   else {
+            this.setState((state)   =>  {
+                strikes: this.state.strikes++
+            })
+        }
+    }
+
+    ballButtonClickHandler    =   ()  =>  {
+        if(this.state.balls    === 3)  {
+            this.setState((state)   =>  ({
+                strikes: 0,
+                balls: 0
+            }))
+        }   else {
+            this.setState((state)   =>  {
+                balls: this.state.balls++
+            })
+        }
+    }
+
+    hitButtonClickHandler    =   ()  =>  {
+            this.setState((state)   =>  ({
+                strikes: 0,
+                balls: 0
+            }))
+    }
 
   render() {
     return (
       <div className="App">
         <Display strikes={this.state.strikes} balls={this.state.balls} />
-        <Dashboard />
+        <Dashboard
+            strikeButtonClickHandler = {this.strikeButtonClickHandler}
+            foulButtonClickHandler = {this.foulButtonClickHandler}
+            ballButtonClickHandler = {this.ballButtonClickHandler}
+            hitButtonClickHandler = {this.hitButtonClickHandler}
+        />
       </div>
     );
   }
