@@ -92,10 +92,10 @@ describe('Dashboard renders and functions properly',  ()  =>  {
       render(<Dashboard />);
     });
     test('Dashboard buttons render without crashing',   ()  =>  {
-        const ballButton = component.getByTestId('ballButton')
-        const foulButton = component.getByTestId('foulButton')
-        const hitButton = component.getByTestId('hitButton')
-        const strikeButton = component.getByTestId('strikeButton')
+        const ballButton = dashboard.getByTestId('ballButton')
+        const foulButton = dashboard.getByTestId('foulButton')
+        const hitButton = dashboard.getByTestId('hitButton')
+        const strikeButton = dashboard.getByTestId('strikeButton')
         expect(ballButton).toHaveTextContent(/ball/i);
         expect(strikeButton).toHaveTextContent(/strike/i);
         expect(foulButton).toHaveTextContent(/foul/i);
