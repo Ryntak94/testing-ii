@@ -62,7 +62,7 @@ describe('Display renders and functions properly',  ()  =>  {
         expect(strikes).toHaveTextContent('1')
     })
 
-    test('Display balls and strikes reset to 0 when strikes hits 3',  ()  =>  {
+    test('Display balls and strikes reset to 0 when hit button is pressed',  ()  =>  {
         const balls = display.getByTestId('balls');
         const strikes = display.getByTestId('strikes');
         const ballButton = dashboard.getByTestId('ballButton');
